@@ -1,8 +1,11 @@
-# we use maven!
+# maven
 /build.xml
 
-# maven
+# more maven
 /target
+/dependency-reduced-pom.xml
+*/target
+*/dependency-reduced-pom.xml
 
 # vim
 .*.sw[a-p]
@@ -13,11 +16,8 @@
 /dist
 /manifest.mf
 
-/world
-
 # Mac filesystem dust
 /.DS_Store
-*.DS_Store
 
 # intellij
 *.iml
