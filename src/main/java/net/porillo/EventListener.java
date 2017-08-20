@@ -2,7 +2,6 @@ package net.porillo;
 
 import net.porillo.config.WorldConfiguration;
 import net.porillo.types.Type;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -345,7 +344,7 @@ public class EventListener extends Utility implements Listener {
         final Player p = e.getPlayer();
 
         if (drops.containsKey(p.getName())) {
-            Bukkit.getScheduler().runTaskLater(getHandle(), () -> {
+            EntityManager.getInstance().getServer().getScheduler().runTaskLater(getHandle(), () -> {
                 WorldConfiguration wc = getConfig(p.getWorld());
                 al(wc, "Player " + p.getName() + " respawned with their items");
                 al(wc, p, "&6Your items were returned after death!");

@@ -2,7 +2,6 @@ package net.porillo;
 
 import net.porillo.commands.CommandHandler;
 import net.porillo.config.WorldConfiguration;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,12 +12,14 @@ import java.util.List;
 
 public class EntityManager extends JavaPlugin {
 
+    private static EntityManager instance;
     private CommandHandler handler = new CommandHandler(this);
     private List<WorldConfiguration> configs;
 
     @Override
     public void onEnable() {
-        Bukkit.getScheduler().runTask(this, new Runnable() {
+        instance = this;
+        getServer().getScheduler().runTask(this, new Runnable() {
 
             @Override
             public void run() {
@@ -39,7 +40,7 @@ public class EntityManager extends JavaPlugin {
 
     public void load() {
         configs = new ArrayList<WorldConfiguration>();
-        for (World w : Bukkit.getWorlds())
+        for (World w : getServer().getWorlds())
             load(w.getName());
     }
 
@@ -54,6 +55,10 @@ public class EntityManager extends JavaPlugin {
             if (wc.getWorld().equals(world))
                 return wc;
         throw new RuntimeException("Config not found! " + world);
+    }
+
+    public static EntityManager getInstance() {
+        return instance;
     }
 
     public List<WorldConfiguration> getWorlds() {

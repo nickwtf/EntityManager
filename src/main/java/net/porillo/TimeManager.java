@@ -1,7 +1,6 @@
 package net.porillo;
 
 import net.porillo.config.WorldConfiguration;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 
 import static net.porillo.types.Option.*;
@@ -17,7 +16,7 @@ public class TimeManager {
     }
 
     private void start(EntityManager em, String name, final long target, long every) {
-        final World world = Bukkit.getWorld(name);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(em, () -> world.setTime(target), every, every);
+        final World world = EntityManager.getInstance().getServer().getWorld(name);
+        EntityManager.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(em, () -> world.setTime(target), every, every);
     }
 }

@@ -3,7 +3,6 @@ package net.porillo;
 import net.porillo.config.WorldConfiguration;
 import net.porillo.types.Option;
 import net.porillo.types.Permission;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -33,13 +32,13 @@ public class Utility {
 
     private static void adA(String message, String world) {
         String msg = "&2[&4Alert&2] [&6" + world + "&2] &c" + message;
-        for (Player p : Bukkit.getOnlinePlayers())
+        for (Player p : EntityManager.getInstance().getServer().getOnlinePlayers())
             if (p.hasPermission(Permission.aDMINA))
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
     }
 
     public void register(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, manager);
+        EntityManager.getInstance().getServer().getPluginManager().registerEvents(listener, manager);
     }
 
     public boolean alert(WorldConfiguration conf, Player p, String name) {
